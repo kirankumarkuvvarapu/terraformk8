@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8app
+  labels:
+    app: k8app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8app
+  template:
+    metadata:
+      labels:
+        app: k8app
+    spec:
+      containers:
+      - name: k8app
+        image: atlassian/bitbucket-server
+        ports:
+        - containerPort: 7990
+      volumes:
+      - name: my-shared-vol
+        persistentVolumeClaim:
+          claimName: my-shared-vol-pvc

@@ -1,0 +1,13 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: k8app
+spec:
+  gatewayClassName: k8app
+  listeners:
+   - protocol: HTTP
+     port: 80
+     name: k8app-gateway
+     allowedRoutes:
+      namespaces:
+        from: All

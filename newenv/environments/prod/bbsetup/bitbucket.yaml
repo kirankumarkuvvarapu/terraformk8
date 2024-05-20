@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bitbucket
+  labels:
+    app: bitbucket
+spec:
+  selector:
+    matchLabels:
+      app: bitbucket
+  serviceName: bitbucket
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bitbucket
+    spec:
+      containers:
+      - name: bitbucketdc
+        image: atlassian/bitbucket
+        ports:
+        - containerPort: 7990
+          name: bibucket
+        volumeMounts:
+        - name: bitbucketdata
+          mountPath: "/var/atlassian/application-data/bitbucket"
+  volumeClaimTemplates:
+  - metadata:
+     name: bitbucketdata
+    spec:
+     accessModes:
+     - ReadWriteOnce
+#     storageClassName: "efs-pv"
+     resources:
+       requests:
+        storage: 20Gi

@@ -1,0 +1,48 @@
+= Terraform with mutiple environments to setup VPC and subnets
+
+== This is a readme file and POC to setup VPC with 2 subnets (private and public)
+
+==  Prerequisites:
+    1) Make sure You have added access key and security to your terminal by running $aws configure
+    2) Create S3 bucket (s3 backend) to track the state of the deployment.
+       example: bucket = "scw-tf-state1"
+       file location : environments/prod/networking/main.tf
+    
+   
+    Note: Plan is to  create aws bastion instance with profile and use that instance to deploy infra 
+
+== folder structure
+.
+├── environments     #include environments
+│   └── prod
+│       └── networking
+│           ├── main.tf
+│           ├── outputs.tf
+│           ├── variables.tf
+│           └── versions.tf
+├── global              # for global variables
+├── modules             # For all the modules
+│   └── vpc
+│       ├── main.tf
+│       ├── outputs.tf
+│       └── vari
+      
+== How to run
+1) Go to prod directory placed in environment folder
+2)  $ terraform init
+    $ terraform plan
+    $ terraform apply
+
+== Terraform to setup EKS cluster
+1) Configure AWS keys in your laptop/bastion
+2) Go to newenv->environments->prod->k8setup
+3) Run below commands
+2)  $ terraform init
+    $ terraform plan
+    $ terraform apply
+    This will create new vpc with 3private subnets and 3 public subnets.
+
+
+Note: If you face any issue while setup try to remove terraform.state file and try again.
+
+

@@ -1,0 +1,20 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: bitbucketdc
+  labels:
+    app: bitbucketdc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bitbucketdc
+  template:
+    metadata:
+      labels:
+        app: bitbucketdcv
+    spec:
+      containers:
+        - name: bitbcuketdc
+          image: atlassian/bitbucket
+          args:
